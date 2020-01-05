@@ -28,13 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.Btn_Send_Message = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // Btn_Send_Message
+            // 
+            this.Btn_Send_Message.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Send_Message.Location = new System.Drawing.Point(223, 169);
+            this.Btn_Send_Message.Name = "Btn_Send_Message";
+            this.Btn_Send_Message.Size = new System.Drawing.Size(144, 67);
+            this.Btn_Send_Message.TabIndex = 0;
+            this.Btn_Send_Message.Text = "Send Message";
+            this.Btn_Send_Message.UseVisualStyleBackColor = true;
+            this.Btn_Send_Message.Click += new System.EventHandler(this.Btn_Send_Message_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(584, 436);
+            this.Controls.Add(this.Btn_Send_Message);
+            this.Name = "Form1";
+            this.Text = "LINE Bot Control Center";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button Btn_Send_Message;
     }
 }
 
