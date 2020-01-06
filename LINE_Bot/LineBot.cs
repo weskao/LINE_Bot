@@ -1,4 +1,5 @@
-﻿using isRock.LineBot;
+﻿using System;
+using isRock.LineBot;
 
 namespace LINE_Bot
 {
@@ -18,6 +19,16 @@ namespace LINE_Bot
         public void PushMessage(string message)
         {
             Bot.PushMessage(_adminUserId, message);
+        }
+
+        public void PushMessage(int packageId, int stickerId)
+        {
+            Bot.PushMessage(_adminUserId, 1, 2);
+        }
+
+        public void PushMessage(Uri imgUri)
+        {
+            Bot.PushMessage(_adminUserId, imgUri);
         }
     }
 }
