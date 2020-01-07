@@ -43,5 +43,11 @@ namespace LINE_Bot
 
             _lineBot.PushMessage(buttonsTemplate);
         }
+
+        private void Send_Confirm_Template_Click(object sender, EventArgs e)
+        {
+            var confirmTemplate = _lineBot.CreateSampleConfirmTemplate();
+            _lineBot.PushMessage(confirmTemplate);
+        }
     }
 }

@@ -34,6 +34,8 @@
             this.TextBox_Image_Url = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Send_Button_Template = new System.Windows.Forms.Button();
+            this.Send_Confirm_Template = new System.Windows.Forms.Button();
+            this.Send_Carousel_Template = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Btn_Send_Text
@@ -101,11 +103,34 @@
             this.Send_Button_Template.UseVisualStyleBackColor = true;
             this.Send_Button_Template.Click += new System.EventHandler(this.Send_Button_Template_Click);
             // 
+            // Send_Confirm_Template
+            // 
+            this.Send_Confirm_Template.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Send_Confirm_Template.Location = new System.Drawing.Point(223, 356);
+            this.Send_Confirm_Template.Name = "Send_Confirm_Template";
+            this.Send_Confirm_Template.Size = new System.Drawing.Size(144, 67);
+            this.Send_Confirm_Template.TabIndex = 6;
+            this.Send_Confirm_Template.Text = "Send Confirm Template";
+            this.Send_Confirm_Template.UseVisualStyleBackColor = true;
+            this.Send_Confirm_Template.Click += new System.EventHandler(this.Send_Confirm_Template_Click);
+            // 
+            // Send_Carousel_Template
+            // 
+            this.Send_Carousel_Template.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Send_Carousel_Template.Location = new System.Drawing.Point(397, 356);
+            this.Send_Carousel_Template.Name = "Send_Carousel_Template";
+            this.Send_Carousel_Template.Size = new System.Drawing.Size(144, 67);
+            this.Send_Carousel_Template.TabIndex = 7;
+            this.Send_Carousel_Template.Text = "Send Carousel Template";
+            this.Send_Carousel_Template.UseVisualStyleBackColor = true;
+            // 
             // LineBotForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 515);
+            this.Controls.Add(this.Send_Carousel_Template);
+            this.Controls.Add(this.Send_Confirm_Template);
             this.Controls.Add(this.Send_Button_Template);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TextBox_Image_Url);
@@ -127,6 +152,8 @@
         private System.Windows.Forms.TextBox TextBox_Image_Url;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button Send_Button_Template;
+        private System.Windows.Forms.Button Send_Confirm_Template;
+        private System.Windows.Forms.Button Send_Carousel_Template;
     }
 }
 
