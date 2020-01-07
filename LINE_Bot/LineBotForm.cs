@@ -5,7 +5,7 @@ namespace LINE_Bot
 {
     public partial class LineBotForm : Form
     {
-        private LineBot _lineBot;
+        private MyLineBot _lineBot;
 
         public LineBotForm()
         {
@@ -34,7 +34,14 @@ namespace LINE_Bot
 
         private void CreateBot()
         {
-            _lineBot = new LineBot();
+            _lineBot = new MyLineBot();
+        }
+
+        private void Send_Button_Template_Click(object sender, EventArgs e)
+        {
+            var buttonsTemplate = _lineBot.CreateSampleButtonTemplate();
+
+            _lineBot.PushMessage(buttonsTemplate);
         }
     }
 }

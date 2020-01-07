@@ -33,6 +33,7 @@
             this.Btn_Send_Image = new System.Windows.Forms.Button();
             this.TextBox_Image_Url = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.Send_Button_Template = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Btn_Send_Text
@@ -89,11 +90,23 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Image url (https):";
             // 
+            // Send_Button_Template
+            // 
+            this.Send_Button_Template.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Send_Button_Template.Location = new System.Drawing.Point(35, 356);
+            this.Send_Button_Template.Name = "Send_Button_Template";
+            this.Send_Button_Template.Size = new System.Drawing.Size(144, 67);
+            this.Send_Button_Template.TabIndex = 5;
+            this.Send_Button_Template.Text = "Send Button Template";
+            this.Send_Button_Template.UseVisualStyleBackColor = true;
+            this.Send_Button_Template.Click += new System.EventHandler(this.Send_Button_Template_Click);
+            // 
             // LineBotForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 515);
+            this.Controls.Add(this.Send_Button_Template);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TextBox_Image_Url);
             this.Controls.Add(this.Btn_Send_Image);
@@ -113,6 +126,7 @@
         private System.Windows.Forms.Button Btn_Send_Image;
         private System.Windows.Forms.TextBox TextBox_Image_Url;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button Send_Button_Template;
     }
 }
 

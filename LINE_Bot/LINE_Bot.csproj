@@ -173,7 +173,7 @@
     <Compile Include="LineBotForm.Designer.cs">
       <DependentUpon>LineBotForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LineBot.cs" />
+    <Compile Include="MyLineBot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="LineBotForm.resx">
