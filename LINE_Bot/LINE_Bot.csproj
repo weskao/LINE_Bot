@@ -176,6 +176,7 @@
     <Compile Include="MyLineBot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TemplateType.cs" />
     <EmbeddedResource Include="LineBotForm.resx">
       <DependentUpon>LineBotForm.cs</DependentUpon>
     </EmbeddedResource>

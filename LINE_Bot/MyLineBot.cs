@@ -40,7 +40,7 @@ namespace LINE_Bot
             Bot.PushMessage(_receiveMsgUserId, buttonsTemplate);
         }
 
-        public ButtonsTemplate CreateSampleButtonTemplate()
+        public ButtonsTemplate CreateSampleButtonsTemplate()
         {
             return new ButtonsTemplate
             {
@@ -68,7 +68,7 @@ namespace LINE_Bot
             {
                 text = "請問你想選擇的是...?",
                 actions = CreateSampleConfirmActions(),
-                altText = "您目前的裝置不支援ConfirmTemplate，想看😙? 無法顯示啦~🤗"
+                altText = "您目前的裝置不支援 ConfirmTemplate，想看😙? 無法顯示啦~🤗"
             };
         }
 
@@ -84,6 +84,17 @@ namespace LINE_Bot
         public void PushMessage(ConfirmTemplate confirmTemplate)
         {
             Bot.PushMessage(_receiveMsgUserId, confirmTemplate);
+        }
+
+        public TemplateMessageBase CreateSampleTemplate(TemplateType templateType)
+        {
+            var templateMessages = new Dictionary<TemplateType, TemplateMessageBase>()
+            {
+                {TemplateType.ButtonsTemplate, CreateSampleButtonsTemplate()},
+                {TemplateType.ConfirmTemplate, CreateSampleConfirmTemplate()}
+            };
+
+            return templateMessages[templateType];
         }
     }
 }

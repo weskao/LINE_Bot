@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using isRock.LineBot;
 
 namespace LINE_Bot
 {
@@ -39,15 +40,15 @@ namespace LINE_Bot
 
         private void Send_Button_Template_Click(object sender, EventArgs e)
         {
-            var buttonsTemplate = _lineBot.CreateSampleButtonTemplate();
+            var buttonsTemplate = _lineBot.CreateSampleTemplate(TemplateType.ButtonsTemplate);
 
-            _lineBot.PushMessage(buttonsTemplate);
+            _lineBot.PushMessage((ButtonsTemplate)buttonsTemplate);
         }
 
         private void Send_Confirm_Template_Click(object sender, EventArgs e)
         {
-            var confirmTemplate = _lineBot.CreateSampleConfirmTemplate();
-            _lineBot.PushMessage(confirmTemplate);
+            var confirmTemplate = _lineBot.CreateSampleTemplate(TemplateType.ConfirmTemplate);
+            _lineBot.PushMessage((ConfirmTemplate)confirmTemplate);
         }
     }
 }
