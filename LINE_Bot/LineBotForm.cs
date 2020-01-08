@@ -56,5 +56,11 @@ namespace LINE_Bot
             var carouselTemplate = _lineBot.CreateSampleTemplate(TemplateType.CarouselTemplate);
             _lineBot.PushMessage((CarouselTemplate)carouselTemplate);
         }
+
+        private void Send_Image_Carousel_Template_Click(object sender, EventArgs e)
+        {
+            var imageCarouselTemplate = _lineBot.CreateSampleTemplate(TemplateType.ImageCarouselTemplate);
+            _lineBot.PushMessage((ImageCarouselTemplate)imageCarouselTemplate);
+        }
     }
 }

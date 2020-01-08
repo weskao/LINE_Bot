@@ -8,7 +8,8 @@ namespace LINE_Bot
     public class MyLineBot
     {
         private readonly string _receiveMsgUserId;
-        public static int CumulativeNumber { get; private set; } = 0;
+        public static int ColumnCumulativeNumber { get; private set; } = 0;
+        public static int ImageColumnCumulativeNumber { get; private set; } = 0;
         public static List<TemplateActionBase> SampleTemplateActions => null;
         private const string ImageUrl = "https://cff2.earth.com/uploads/2019/09/03150152/Fast-fashion-has-an-enormous-carbon-footprint-730x410.jpg";
         private static Bot Bot { get; set; }
@@ -90,13 +91,43 @@ namespace LINE_Bot
             };
         }
 
+        private TemplateMessageBase CreateSampleImageCarouselTemplate()
+        {
+            return new ImageCarouselTemplate()
+            {
+                columns = new List<ImageCarouselColumn>()
+                {
+                    CreateSampleImageColumn(),
+                    new ImageCarouselColumn()
+                    {
+                        imageUrl = new Uri(ImageUrl),
+                        action = new DateTimePickerAction()
+                        {
+                            label = "Select time",
+                            mode = "time"
+                        }
+                    }
+                }
+            };
+        }
+
+        private ImageCarouselColumn CreateSampleImageColumn()
+        {
+            ImageColumnCumulativeNumber++;
+            return new ImageCarouselColumn()
+            {
+                imageUrl = new Uri(ImageUrl),
+                action = new MessageAction() { label = $"label {ImageColumnCumulativeNumber}", text = "Message~" }
+            };
+        }
+
         private Column CreateSampleColumn()
         {
-            CumulativeNumber++;
+            ColumnCumulativeNumber++;
             return new Column()
             {
-                text = $"ButtonsTemplate 文字訊息{CumulativeNumber}",
-                title = $"ButtonsTemplate 標題{CumulativeNumber}",
+                text = $"ButtonsTemplate 文字訊息{ColumnCumulativeNumber}",
+                title = $"ButtonsTemplate 標題{ColumnCumulativeNumber}",
                 thumbnailImageUrl = new Uri(ImageUrl),
                 actions = CreateSampleTemplateActions().GetRange(3, 3)
             };
@@ -121,13 +152,19 @@ namespace LINE_Bot
             Bot.PushMessage(_receiveMsgUserId, confirmTemplate);
         }
 
+        public void PushMessage(ImageCarouselTemplate imageCarouselTemplate)
+        {
+            Bot.PushMessage(_receiveMsgUserId, imageCarouselTemplate);
+        }
+
         public TemplateMessageBase CreateSampleTemplate(TemplateType templateType)
         {
             var templateMessages = new Dictionary<TemplateType, TemplateMessageBase>()
             {
                 {TemplateType.ButtonsTemplate, CreateSampleButtonsTemplate()},
                 {TemplateType.ConfirmTemplate, CreateSampleConfirmTemplate()},
-                {TemplateType.CarouselTemplate, CreateSampleCarouselTemplate() }
+                {TemplateType.CarouselTemplate, CreateSampleCarouselTemplate() },
+                {TemplateType.ImageCarouselTemplate, CreateSampleImageCarouselTemplate() }
             };
 
             return templateMessages[templateType];

@@ -4,6 +4,7 @@
     {
         ButtonsTemplate,
         ConfirmTemplate,
-        CarouselTemplate
+        CarouselTemplate,
+        ImageCarouselTemplate
     }
 }
