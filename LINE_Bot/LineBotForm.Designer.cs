@@ -123,6 +123,7 @@
             this.Send_Carousel_Template.TabIndex = 7;
             this.Send_Carousel_Template.Text = "Send Carousel Template";
             this.Send_Carousel_Template.UseVisualStyleBackColor = true;
+            this.Send_Carousel_Template.Click += new System.EventHandler(this.Send_Carousel_Template_Click);
             // 
             // LineBotForm
             // 

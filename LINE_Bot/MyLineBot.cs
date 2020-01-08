@@ -7,17 +7,18 @@ namespace LINE_Bot
 {
     public class MyLineBot
     {
-        private readonly string _adminUserId;
         private readonly string _receiveMsgUserId;
-        private static string _token;
+        public static int CumulativeNumber { get; private set; } = 0;
+        public static List<TemplateActionBase> SampleTemplateActions => null;
+        private const string ImageUrl = "https://cff2.earth.com/uploads/2019/09/03150152/Fast-fashion-has-an-enormous-carbon-footprint-730x410.jpg";
         private static Bot Bot { get; set; }
 
         public MyLineBot()
         {
-            _token = "ufFSRRG5kRRWF7cWQfIXj5dbVHda0mwH8x5vS1OSHxWfCfqXNwvHMqfgXUFyR4Bjt8ACWpSoJwqyj+y0QAy/YB4mrF9+exiJO3YRlCewXgdk6L65H2YgBvNpHPH1ZRqkw7rmqdis2Bh6SEbWaF7X8wdB04t89/1O/w1cDnyilFU=";
-            _adminUserId = "U89e2dae55874fe65fd11d313b89f0a00";
-            _receiveMsgUserId = _adminUserId;
-            Bot = new Bot(_token);
+            var token = "ufFSRRG5kRRWF7cWQfIXj5dbVHda0mwH8x5vS1OSHxWfCfqXNwvHMqfgXUFyR4Bjt8ACWpSoJwqyj+y0QAy/YB4mrF9+exiJO3YRlCewXgdk6L65H2YgBvNpHPH1ZRqkw7rmqdis2Bh6SEbWaF7X8wdB04t89/1O/w1cDnyilFU=";
+            var adminUserId = "U89e2dae55874fe65fd11d313b89f0a00";
+            _receiveMsgUserId = adminUserId;
+            Bot = new Bot(token);
         }
 
         public void PushMessage(string message)
@@ -40,29 +41,33 @@ namespace LINE_Bot
             Bot.PushMessage(_receiveMsgUserId, buttonsTemplate);
         }
 
-        public ButtonsTemplate CreateSampleButtonsTemplate()
+        private ButtonsTemplate CreateSampleButtonsTemplate()
         {
             return new ButtonsTemplate
             {
-                thumbnailImageUrl = new Uri("https://cff2.earth.com/uploads/2019/09/03150152/Fast-fashion-has-an-enormous-carbon-footprint-730x410.jpg"),
+                thumbnailImageUrl = new Uri(ImageUrl),
                 text = "請問你想買哪一類的服飾?",
                 title = "Question",
-                actions = CreateSampleTemplateActions(),
+                actions = CreateSampleTemplateActions().GetRange(0, 3),
                 //                altText = "您目前的裝置不支援TemplateMessage，想看😙? 無法顯示啦~🤗"
             };
         }
 
-        public List<TemplateActionBase> CreateSampleTemplateActions()
+        private List<TemplateActionBase> CreateSampleTemplateActions()
         {
-            return new List<TemplateActionBase>()
+            return SampleTemplateActions ?? new List<TemplateActionBase>
             {
                 new MessageAction {label = "男裝", text = "man"},
                 new MessageAction {label = "女裝", text = "woman"},
                 new MessageAction {label = "童裝", text = "children"},
+                new MessageAction() {label = "標題-文字回覆", text = "回覆文字"},
+                new UriAction() {label = "標題-Google", uri = new Uri("http://www.google.com")},
+                new PostbackAction()
+                    {label = "標題-發生 post back", data = "abc=aaa&def=111", displayText = "Occurred post back"}
             };
         }
 
-        public ConfirmTemplate CreateSampleConfirmTemplate()
+        private ConfirmTemplate CreateSampleConfirmTemplate()
         {
             return new ConfirmTemplate()
             {
@@ -72,13 +77,43 @@ namespace LINE_Bot
             };
         }
 
+        private TemplateMessageBase CreateSampleCarouselTemplate()
+        {
+            return new CarouselTemplate()
+            {
+                columns = new List<Column>()
+                {
+                    CreateSampleColumn(),
+                    CreateSampleColumn(),
+                    CreateSampleColumn()
+                }
+            };
+        }
+
+        private Column CreateSampleColumn()
+        {
+            CumulativeNumber++;
+            return new Column()
+            {
+                text = $"ButtonsTemplate 文字訊息{CumulativeNumber}",
+                title = $"ButtonsTemplate 標題{CumulativeNumber}",
+                thumbnailImageUrl = new Uri(ImageUrl),
+                actions = CreateSampleTemplateActions().GetRange(3, 3)
+            };
+        }
+
         private List<TemplateActionBase> CreateSampleConfirmActions()
         {
             var confirmActions = CreateSampleTemplateActions();
-            var lastIndex = confirmActions.Count - 1;
-            confirmActions.RemoveAt(lastIndex);
+            var countConfirmActionMustHave = 2;
+            confirmActions.RemoveRange(countConfirmActionMustHave, confirmActions.Count - countConfirmActionMustHave);
 
             return confirmActions;
+        }
+
+        public void PushMessage(CarouselTemplate carouselTemplate)
+        {
+            Bot.PushMessage(_receiveMsgUserId, carouselTemplate);
         }
 
         public void PushMessage(ConfirmTemplate confirmTemplate)
@@ -91,7 +126,8 @@ namespace LINE_Bot
             var templateMessages = new Dictionary<TemplateType, TemplateMessageBase>()
             {
                 {TemplateType.ButtonsTemplate, CreateSampleButtonsTemplate()},
-                {TemplateType.ConfirmTemplate, CreateSampleConfirmTemplate()}
+                {TemplateType.ConfirmTemplate, CreateSampleConfirmTemplate()},
+                {TemplateType.CarouselTemplate, CreateSampleCarouselTemplate() }
             };
 
             return templateMessages[templateType];

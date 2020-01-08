@@ -3,6 +3,7 @@
     public enum TemplateType
     {
         ButtonsTemplate,
-        ConfirmTemplate
+        ConfirmTemplate,
+        CarouselTemplate
     }
 }
