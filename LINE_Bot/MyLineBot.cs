@@ -13,6 +13,7 @@ namespace LINE_Bot
         public static List<TemplateActionBase> SampleTemplateActions => null;
         private const string ImageUrl = "https://cff2.earth.com/uploads/2019/09/03150152/Fast-fashion-has-an-enormous-carbon-footprint-730x410.jpg";
         private static Bot Bot { get; set; }
+        private ITemplateManagerFactory _templateManager;
 
         public MyLineBot()
         {
@@ -20,6 +21,7 @@ namespace LINE_Bot
             var adminUserId = "U89e2dae55874fe65fd11d313b89f0a00";
             _receiveMsgUserId = adminUserId;
             Bot = new Bot(token);
+            _templateManager = TemplateManagerFactory.Create();
         }
 
         public void PushMessage(string message)
@@ -168,6 +170,55 @@ namespace LINE_Bot
             };
 
             return templateMessages[templateType];
+        }
+    }
+
+    public class TemplateManagerFactory
+    {
+        private static ITemplateManagerFactory _customerManager;
+
+        public static ITemplateManagerFactory Create()
+        {
+            if (_customerManager != null)
+            {
+                return _customerManager;
+            }
+
+            return new SampleTemplateActionManager();
+        }
+    }
+
+    public class SampleTemplateActionManager : ITemplateManagerFactory
+    {
+        private List<TemplateActionBase> _templateActionBases;
+
+        public SampleTemplateActionManager()
+        {
+            _templateActionBases = SampleActionFactory.Create();
+        }
+    }
+
+    public class SampleActionFactory
+    {
+        private static List<TemplateActionBase> _templateActionBases;
+
+        public static List<TemplateActionBase> Create()
+        {
+            if (_templateActionBases != null)
+            {
+                return _templateActionBases;
+            }
+
+            return new List<TemplateActionBase>
+            {
+                new MessageAction {label = "男裝", text = "man"},
+                new MessageAction {label = "女裝", text = "woman"},
+                new MessageAction {label = "童裝", text = "children"},
+                new MessageAction() {label = "標題-文字回覆", text = "回覆文字"},
+                new UriAction() {label = "標題-Google", uri = new Uri("http://www.google.com")},
+                new PostbackAction()
+                    {label = "標題-發生 post back", data = "abc=aaa&def=111", displayText = "Occurred post back"}
+            };
         }
     }
 }
