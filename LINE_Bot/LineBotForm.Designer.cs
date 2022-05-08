@@ -80,8 +80,7 @@
             this.TextBox_Image_Url.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.TextBox_Image_Url.Size = new System.Drawing.Size(528, 41);
             this.TextBox_Image_Url.TabIndex = 3;
-            this.TextBox_Image_Url.Text = "https://www.google.com.tw/images/branding/googlelogo/2x/googlelogo_color_272x92dp" +
-    ".png";
+            this.TextBox_Image_Url.Text = "https://i.imgur.com/bj81NPF.jpeg";
             // 
             // label1
             // 
